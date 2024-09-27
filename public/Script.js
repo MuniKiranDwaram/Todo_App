@@ -6,7 +6,7 @@ const AddToDo=document.getElementById("AddTodo");
 const TodoList=document.getElementById("Todo-list");
 const count=document.getElementById("Count");
 const deleteAll=document.getElementById("DeleteAllButton");
-
+todo.length=0;
 let itemNumber = 0;
 
 
@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const newItemHTML = `<li class="flex items-center">
             <input type="checkbox" class="CheckBox_${itemNumber}">
             <p id="label_${itemNumber}" class="ml-2">${Item}</p>
-            <i class="fa-regular fa-x" height=""5px" width="5px" onclick="removeItem(event)"></i>
+            <i class="fa-solid fa-pen-to-square w-[10px] h-[10px] m-1" onclick="editItem(event)"></i>
+            <i class="fa-regular fa-x w-[10px] h-[10px] m-1" id=""RemoveIcon onclick="removeItem(event)"></i>
             </li>`;
             TodoList.innerHTML += newItemHTML; 
             const label = document.getElementById(`label_${itemNumber}`);
@@ -91,4 +92,21 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         const label = e.target.nextElementSibling; 
         label.classList.toggle("completed");
+    }
+
+    function editItem(event)
+    {
+            // Get the current label element
+    const labelElement = event.target.parentElement.querySelector('p');
+    
+    // Prompt the user for a new label
+    const newLabel = prompt("Edit the label:", labelElement.textContent);
+    
+    // If the user entered a new label, update the text content
+    if (newLabel !== null && newLabel !=="") {
+        labelElement.textContent = newLabel;}
+        else
+        {
+            labelElement.textContent = labelElement.textContent;
+        }
     }
